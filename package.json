@@ -12,7 +12,6 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "nightmare": "^2.10.0",
-    "nightmare-download-manager": "^0.2.4",
-    "nightmare-inline-download": "^0.2.2"
+    "nightmare-download-manager": "^0.2.4"
   }
 }

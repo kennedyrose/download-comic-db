@@ -575,13 +575,6 @@ nightmare-download-manager@^0.2.4:
     debug "^2.2.0"
     sliced "^1.0.1"
 
-nightmare-inline-download@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/nightmare-inline-download/-/nightmare-inline-download-0.2.2.tgz#a8d6a824720528e43680dd199f23a39ce952f0ac"
-  dependencies:
-    debug "^2.2.0"
-    sliced "^1.0.1"
-
 nightmare@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nightmare/-/nightmare-2.10.0.tgz#e9c5d590bb296f59685fd48218c2fbac44767b21"
