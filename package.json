@@ -1,0 +1,9 @@
+{
+  "name": "download-comic-db",
+  "version": "0.0.0",
+  "description": "Downloads a backup of CLZ content",
+  "main": "index.js",
+  "repository": "https://github.com/kennedyrose/download-comic-db.git",
+  "author": "Kennedy Rose <kennedy@kennedyrose.com>",
+  "license": "MIT"
+}
