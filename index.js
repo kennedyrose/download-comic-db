@@ -1,13 +1,25 @@
 'use strict'
 require('dotenv').config({ silent: true })
-const Horseman = require('node-horseman')
-var horseman = new Horseman()
+const Nightmare = require('nightmare')
+require('nightmare-download-manager')(Nightmare)
+//require('nightmare-inline-download')(Nightmare)
+const nightmare = Nightmare({
+	show: true,
+	openDevTools: true,
+	alwaysOnTop: false
+})
+nightmare.on('download', function(state, downloadItem){
+	console.log(state)
+	if(state == 'started'){
+		console.log(downloadItem)
+		nightmare.emit('download', './', downloadItem)
+	}
+})
 
-// TODO switch to nightmare.js for inline downloading?
-
-horseman
-	.open(`https://cloud.collectorz.com/${process.env.CLZ_USER_ID}/comics/export`)
-	.waitForSelector('.btn-default')
+nightmare
+	.downloadManager()
+	.goto(`https://cloud.collectorz.com/${process.env.CLZ_USER_ID}/comics/export`)
+	.wait('.btn-default')
 	// Select all fields
 	.click('[data-fields-sortable-move-all]')
 	// Sort by date
@@ -17,12 +29,15 @@ horseman
 	.select('[name="export[items-sorting][1][field]"]', 'issue')
 	.select('[name="export[items-sorting][1][order]"]', 'desc')
 	.click('[data-export="prepare"]')
-	.waitForSelector(`[href="/${process.env.CLZ_USER_ID}/comics/export/download"]`)
-	//.click(`[href="/${process.env.CLZ_USER_ID}/comics/export/download"]`)
-	.screenshotBase64('JPEG')
-	.then(data => {
-		const fs = require('fs')
-		var buf = new Buffer(data, 'base64');
-		fs.writeFile('image.jpg', buf);
-	})
-	.close()
+	.wait(`[href="/${process.env.CLZ_USER_ID}/comics/export/download"]`)
+	.evaluate(function(selector){
+		var el = document.querySelector(selector)
+		el.removeAttribute('target')
+	}, `[href="/${process.env.CLZ_USER_ID}/comics/export/download"]`)
+	.click(`[href="/${process.env.CLZ_USER_ID}/comics/export/download"]`)
+	//.goto(`https://cloud.collectorz.com/${process.env.CLZ_USER_ID}/comics/export/download`)
+	.waitDownloadsComplete()
+	//.download(`https://cloud.collectorz.com/${process.env.CLZ_USER_ID}/comics/export/download`)
+	//.end()
+	.then(console.log)
+	.catch(console.error)

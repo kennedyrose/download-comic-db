@@ -6,9 +6,13 @@
   "repository": "https://github.com/kennedyrose/download-comic-db.git",
   "author": "Kennedy Rose <kennedy@kennedyrose.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "dotenv": "^4.0.0",
-    "node-horseman": "^3.3.0",
-    "phantomjs-prebuilt": "^2.1.14"
+    "nightmare": "^2.10.0",
+    "nightmare-download-manager": "^0.2.4",
+    "nightmare-inline-download": "^0.2.2"
   }
 }
