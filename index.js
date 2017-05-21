@@ -3,6 +3,8 @@ require('dotenv').config({ silent: true })
 const Horseman = require('node-horseman')
 var horseman = new Horseman()
 
+// TODO switch to nightmare.js for inline downloading?
+
 horseman
 	.open(`https://cloud.collectorz.com/${process.env.CLZ_USER_ID}/comics/export`)
 	.waitForSelector('.btn-default')
