@@ -12,9 +12,8 @@ const nightmare = Nightmare({
 	}
 })
 nightmare.on('download', function(state, downloadItem){
-	if(state == 'completed'){
-		console.log(downloadItem)
-	}
+	console.log(downloadItem)
+	console.log(state)
 })
 
 nightmare
